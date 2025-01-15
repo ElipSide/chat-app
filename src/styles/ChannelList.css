@@ -1,0 +1,66 @@
+/* Styles for the channel list container */
+.channel-list {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the channel list heading */
+.channel-list h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styles for the create channel section */
+.create-channel {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Styles for the input field in create channel */
+.create-channel input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Styles for the create channel button */
+.create-channel button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for the create channel button */
+.create-channel button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the list of channels */
+.channel-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Styles for each channel item */
+.channel-list li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for each channel item */
+.channel-list li:hover {
+  background-color: #f1f1f1;
+}
