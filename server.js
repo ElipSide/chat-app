@@ -6,30 +6,45 @@ const WebSocket = require('ws');
 const app = express();
 const port = 5000;
 
-// Path to the JSON file for storing data
-const dataFilePath = path.join(__dirname, 'data.json');
+// Paths to the JSON files for storing data
+const channelsFilePath = path.join(__dirname, 'channels.json');
+const chatsFilePath = path.join(__dirname, 'chats.json');
 
 // Middleware for JSON and CORS
 app.use(express.json());
 app.use(require('cors')());
 
-// Load data from the JSON file
-function loadData() {
-  if (fs.existsSync(dataFilePath)) {
-    const data = fs.readFileSync(dataFilePath, 'utf-8');
+// Load channels from the JSON file
+function loadChannels() {
+  if (fs.existsSync(channelsFilePath)) {
+    const data = fs.readFileSync(channelsFilePath, 'utf-8');
     return JSON.parse(data);
   }
-  return { channels: [], chats: {} }; // Initialize data if the file doesn't exist
+  return []; // Initialize as an empty array if the file doesn't exist
 }
 
-// Save data to the JSON file
-function saveData(data) {
-  fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+// Load chats from the JSON file
+function loadChats() {
+  if (fs.existsSync(chatsFilePath)) {
+    const data = fs.readFileSync(chatsFilePath, 'utf-8');
+    return JSON.parse(data);
+  }
+  return {}; // Initialize as an empty object if the file doesn't exist
+}
+
+// Save channels to the JSON file
+function saveChannels(channels) {
+  fs.writeFileSync(channelsFilePath, JSON.stringify(channels, null, 2));
+}
+
+// Save chats to the JSON file
+function saveChats(chats) {
+  fs.writeFileSync(chatsFilePath, JSON.stringify(chats, null, 2));
 }
 
 // Initialize data
-let data = loadData();
-const chats = data.chats || {}; // Initialize chats if data.chats is missing
+let channels = loadChannels();
+let chats = loadChats();
 
 // Start the HTTP server
 const server = app.listen(port, () => {
@@ -41,7 +56,7 @@ const wss = new WebSocket.Server({ server });
 
 // API to get the list of channels
 app.get('/api/channels', (req, res) => {
-  res.json(data.channels || []); // Return an empty array if data.channels is missing
+  res.json(channels || []); // Return an empty array if channels is missing
 });
 
 // API to create a new channel
@@ -57,9 +72,10 @@ app.post('/api/channels', (req, res) => {
     owner,
   };
 
-  data.channels.push(newChannel);
+  channels.push(newChannel);
   chats[newChannel.id] = { users: {}, messages: [], owner }; // Create a new chat
-  saveData(data); // Save the data
+  saveChannels(channels); // Save the channels data
+  saveChats(chats); // Save the chats data
 
   res.status(201).json(newChannel);
 });
@@ -166,7 +182,7 @@ function handleMessage(data) {
 
   const chat = chats[chatId];
   chat.messages.push({ username, text }); // Add the message to the chat
-  saveData(data); // Save the data
+  saveChats(chats); // Save the chats data
   broadcastChatData(chatId); // Broadcast the updated chat data
 }
 
@@ -196,7 +212,7 @@ function handleRemoveUser(data) {
     const chat = chats[chatId];
     if (chat.owner === username) {
       delete chat.users[targetUsername]; // Remove the user
-      saveData(data); // Save the data
+      saveChats(chats); // Save the chats data
       broadcastChatData(chatId); // Broadcast the updated chat data
     } else {
       console.error('Only the owner can remove users');

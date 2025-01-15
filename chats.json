@@ -1,0 +1,58 @@
+{
+  "1": {
+    "users": {
+      "admin": "admin",
+      "user1": "user1"
+    },
+    "messages": [
+      {
+        "username": "admin",
+        "text": "Добро пожаловать в общий чат!"
+      },
+      {
+        "username": "user1",
+        "text": "Привет всем!"
+      }
+    ],
+    "owner": "admin"
+  },
+  "2": {
+    "users": {
+      "support": "support",
+      "user2": "user2"
+    },
+    "messages": [
+      {
+        "username": "support",
+        "text": "Чем могу помочь?"
+      },
+      {
+        "username": "user2",
+        "text": "У меня проблема с подключением."
+      }
+    ],
+    "owner": "support"
+  },
+  "1736950128750": {
+    "users": {},
+    "messages": [
+      {
+        "username": "Дима",
+        "text": "фыв"
+      }
+    ],
+    "owner": "Дима"
+  },
+  "1736951289112": {
+    "users": {
+      "Дима": "Дима"
+    },
+    "messages": [
+      {
+        "username": "Дима",
+        "text": "текст"
+      }
+    ],
+    "owner": "Дима"
+  }
+}
