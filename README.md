@@ -43,7 +43,7 @@ Follow these steps to set up and run the project locally.
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-repo/chat-app.git
+   git clone https://github.com/ElipSide/chat-app.git
    cd chat-app
    ```
 
@@ -131,5 +131,5 @@ Follow these steps to set up and run the project locally.
 
 If you have any questions or suggestions, feel free to reach out:
 
-- **Email**: your-email@example.com
-- **GitHub**: your-github-username
+- **Email**: elipside9@gmail.com
+- **GitHub**: ElipSide
